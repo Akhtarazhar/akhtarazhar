@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<haed>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkawira</title>
+    <link rel="stylesheet" href="styleb.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="berkas foto/Logo ASV_25.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Script utama (Firebase + Chart.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Script untuk update gambar dari Firebase Storage -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+        import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
+
+        const firebaseConfig = {
+        apiKey: "AIzaSyC2asz1ljoB875hRk_f5vtcfYWhshH1EEc",
+        authDomain: "aeronautika-df537.firebaseapp.com",
+        projectId: "aeronautika-df537",
+        storageBucket: "aeronautika-df537.appspot.com",
+    };
+
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+
+    async function updateImages() {
+        try {
+        const surfaceRef = ref(storage, "images/surface.jpg");
+        const underwaterRef = ref(storage, "images/underwater.jpg");
+
+        const surfaceUrl = await getDownloadURL(surfaceRef);
+        const underwaterUrl = await getDownloadURL(underwaterRef);
+
+        document.getElementById("firebase-image-surface").src = surfaceUrl + "?t=" + new Date().getTime();
+        document.getElementById("firebase-image-underwater").src = underwaterUrl + "?t=" + new Date().getTime();
+
+        console.log("✅ Gambar diperbarui");
+        } catch (error) {
+        console.error("⚠️ Gagal memuat gambar:", error);
+        }
+    }
+
+    // Jalankan pertama kali
+    updateImages();
+
+    // Perbarui setiap 3 detik (realtime-ish)
+    setInterval(updateImages, 3000);
+    </script>
+
+</haed>
+<body>
+    <section>
+        <nav class="navbar">
+            <div class="navbar__container">
+                <a href="index.html" id="navbar__logo">
+                    <img src="berkas foto/Logo ASV_25.png" alt="Logo">
+                    <div class="navbar-text">
+                        <h1>ARKAWIRA</h1>
+                        <p>Universitas Brawijaya</p>
+                    </div>
+                </a>
+                <div class="navbar__toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="navbar__menu">
+                    <li class="navbar__item">
+                        <a href="#position_log" class="navbar__links">Position-log</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#attitude_information" class="navbar__links">Attitude Information</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    <section class="hero">
+        <div class="image__log">
+            <div class="image__container">
+                <h1>IMAGE CAPTURE</h1>
+                <div class="image__capture">
+                    <div class="image__surface">
+                        <img id="firebase-image-surface" src="https://firebasestorage.googleapis.com/v0/b/aeronautika-df537.appspot.com/o/images%2Fsurface.png?alt=media&token=2f67f61b-ef68-4b9f-bc5d-d31d3e8c6d08&_=" alt="Surface Image">
+                        <h3>Image Surface</h3>
+                    </div>
+                    <div class="image__underwater">
+                        <img id="firebase-image-underwater" src="https://firebasestorage.googleapis.com/v0/b/aeronautika-df537.appspot.com/o/images%2Funderwater.png?alt=media&token=1c32f34d-f6c7-42de-b06d-c00b12b6d808&_=" alt="Underwater Image">
+                        <h3>Image Underwater</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="attitude__information">
+            <div class="attitude__container">
+                <h1>ATTITUDE INFORMATION</h1>
+                <div class="attitude__content">
+                    <div class="indikator">
+                        <h3>SOG</h3>
+                        <p class="value" id="SOG">0.2 Knot</p>
+                    </div>
+                    <div class="indikator">
+                        <h3>COG</h3>
+                        <p class="value" id="COG">45&#176;</p>
+                    </div>
+                    <div class="indikator">
+                        <h3>Position</h3>
+                        <p class="value" id="Position">A1</p>
+                    </div>
+                    <div class="indikator">
+                        <h3>Akumulasi Skor</h3>
+                        <p class="value" id="skor">1</p>
+                    </div>
+                </div>
+                <div class="attitude__geotag">
+                    <div class="geotag">
+                        <h3>Geotag</h3>
+                        <p class="value" id="geot">15/10/2024; [s 3.1412412 E 104.123123]</p>
+                    </div>
+                </div>
+                <div class="attitude__mapping">
+                    <div class="lintasan">
+                        <h3>Lintasan</h3>
+                        <div class="lintasan-A">
+                            <a href="Arkawira.html">A</a>
+                        </div>
+                        <div class="lintasan-B lintasan-B-active">
+                            <a href="#" id="lintasanB">B</a>
+                        </div>
+                    </div>
+                    <div class="mapping__asv">
+                        <canvas id="realtimePlot" width="300" height="300"></canvas>
+                        <h3>Trejectory Mapping</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="javascript.js" type="module"></script>
+    
+</body>
+</html>

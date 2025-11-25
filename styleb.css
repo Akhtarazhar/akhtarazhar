@@ -1,0 +1,335 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.navbar {
+    background: linear-gradient(40deg, #16b9eb, #1265a8);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    z-index: 999;
+}
+
+nav img{
+    width: 120px;
+    margin-right: 1rem;
+}
+
+nav h1 {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: #ffffff;
+}
+
+nav p {
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+#navbar__logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.navbar__links {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+}
+
+.navbar__links:hover {
+    background-color: #005580;
+    border-radius: 5px;
+}
+
+.navbar__menu {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.hero {
+    display: flex;
+}
+
+.image__log {
+    flex-basis: 50%; 
+    background-color: #ffffff;
+    color:#0e0d0d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 18px;
+}
+
+.image__capture img {
+    width: 240px;
+    height: auto;
+    margin: 0.6rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    cursor: pointer;
+}
+
+/* Container dua gambar (surface + underwater) */
+.image__capture {
+    display: flex;               /* supaya horizontal */
+    justify-content: center;
+    align-items: center;
+    gap: 40px;                   /* jarak antar gambar */
+    margin-top: 20px;
+}
+
+.image__surface {
+    padding-right: 20px;
+}
+
+.image__underwater {
+    padding-left: 20px;
+}
+
+.image__capture img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+}
+
+.image__capture button {
+    margin-top: 50px;
+    padding: 10px 60px;
+    background-color: #2e93f3;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.image__capture button:hover {
+    background-color: #1171a1;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Black with opacity */
+}
+
+/* Modal Content (the Image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 8px;
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: #fff;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+}
+
+/* attitude Information */
+.attitude__information {
+    flex-basis: 66.67%; /* 2/3 of the width */
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.attitude__information h1 {
+    margin-top: 0px; /* Mengurangi jarak vertikal di atas judul */
+    margin-bottom: 5px; /* Menyelaraskan jarak antara judul dan indikator */
+    text-align: center; /* Menyelaraskan judul di tengah */
+    padding: 10px; /* Menghilangkan padding default jika ada */
+}
+
+
+/* Indikator Content */
+.attitude__content {
+    display: flex;
+    justify-content: space-between; /* Membuat jarak yang sama antara elemen */
+    gap: 20px; /* Menambahkan jarak antar elemen */
+    width: 100%; /* Memastikan elemen menempati lebar penuh */
+}
+
+.indikator {
+    background-color: #ffffff;
+    font-size: 12px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 22%;
+    transition: transform 0.2s;
+}
+
+/* Geotag */
+.geotag {
+    background-color: #ffffff;
+    font-size: 12px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+}
+
+/* Lintasan */
+.lintasan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    gap: 5px;
+    margin-left: 40px;
+}
+
+.lintasan-A {
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lintasan-B {
+    margin: 0 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lintasan-A a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+
+.lintasan-B a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+}
+
+.lintasan-B:hover {
+    background-color: #00aaff;
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+.lintasan-A-active {
+    background-color: #00aaff;
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+.lintasan-B-active {
+    background-color: #00aaff;
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+.lintasan-A, .lintasan-B {
+    width: 20px;
+    height: 20px;
+}
+
+.lintasan-A a, .lintasan-B a {
+    font-size: 1.2rem;
+}
+
+/* Trajectory Mapping */
+.attitude__mapping{
+    display: flex;
+    justify-content: space-between;
+}
+
+.mapping {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.mapping__asv {
+    position: relative;
+    width: 260px; /* Sesuaikan dengan lebar canvas */
+    height: 260px; /* Sesuaikan dengan tinggi canvas */
+    background-image: url('berkas foto/MAPB.png'); /* Path relatif menuju gambar PNG */
+    background-size: 85% 75%; /* Pastikan gambar menutupi seluruh area */
+    background-repeat: no-repeat; /* Agar gambar tidak diulang */
+    background-position: calc(50% + 9px) 33px;
+    margin-left: auto;
+}
+
+#realtimePlot {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
